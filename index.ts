@@ -81,10 +81,10 @@ interface IListUser {
   find(id: number): Promise<string | null>;
 }
 class ListUserUseCase implements IListUser {
-  constructor(private readonly userMapper: UserMapper) {}
+  constructor(private readonly gateway: UserMapper) {}
 
   async find(id: number): Promise<string | null> {
-    const user = await this.userMapper.find(id.toString());
+    const user = await this.gateway.find(id.toString());
 
     if (!user) {
       console.error("User not exists");
@@ -98,10 +98,10 @@ interface IAddUser {
   insert(user: User): Promise<void>;
 }
 class AddUserUseCase implements IAddUser {
-  constructor(private readonly addUserMapper: AddUserMapper) {}
+  constructor(private readonly gateway: AddUserMapper) {}
 
   async insert(user: User): Promise<void> {
-    await this.addUserMapper.insert(user);
+    await this.gateway.insert(user);
   }
 }
 
